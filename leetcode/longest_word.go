@@ -1,7 +1,8 @@
 package leetcode
 
 import (
-	"golang.org/x/tools/go/ssa/interp/testdata/src/strings"
+	"fmt"
+	"strings"
 )
 
 // 面试题 17.15. 最长单词
@@ -44,9 +45,24 @@ func longestWord(words []string) string {
 	return key
 }
 func canBeCombined(word string, words []string) bool {
+	tmp := word
+	for range words {
+		if trimStart(tmp, words) {
+			return true
+		}
+	}
+	return false
+}
+func trimStart(s string, words []string) bool {
+	fmt.Println("trim", s, words)
+	if s == "" {
+		return true
+	}
 	for _, w := range words {
-		if strings.Index(word, w) == 1 {
-
+		if strings.Index(s, w) == 0 {
+			if trimStart(s[len(w):], words) {
+				return true
+			}
 		}
 	}
 	return false
