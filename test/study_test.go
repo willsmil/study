@@ -8,6 +8,39 @@ import (
 	"time"
 )
 
+func TestChanSelect(t *testing.T)  {
+	ch := make(chan int)
+	go func(){
+		for {
+			select {
+			case x, ok := <-ch:
+				fmt.Println("select...", x, ok)
+			case <-time.After(time.Second):
+				fmt.Println("sleep...")
+			}
+		}
+	}()
+	time.Sleep(2*time.Second)
+}
+
+func TestRangeAppend(t *testing.T)  {
+	var arr []int
+	for i:=0; i<10; i++ {
+		arr = append(arr, i)
+	}
+	fmt.Println(arr)
+	for _, i := range arr {
+		arr = append(arr, i)
+	}
+	fmt.Println(arr)
+}
+
+func TestAssert(t *testing.T)  {
+	var s interface{} = "sss"
+	// x, ok := s.(int)
+	fmt.Println(s.(string))
+}
+
 func TestStr2ByteSlice(t *testing.T) {
 	a := "aaa"
 	b := []byte(a)
