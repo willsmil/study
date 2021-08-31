@@ -5,16 +5,16 @@ import (
 	"fmt"
 	"regexp"
 	"strings"
+
+	"github.com/spf13/cast"
 )
-import "github.com/spf13/cast"
 
 type GrayRuleService struct {
-
 }
 
 func (s *GrayRuleService) validRule(ctx context.Context, visitInfo int, ruleId string) bool {
 	// fmt.Println("valid:", ruleId)
-	return cast.ToInt(ruleId) %2 == 1
+	return cast.ToInt(ruleId)%2 == 1
 }
 
 func (s *GrayRuleService) parseRule2(ctx context.Context, visitInfo int, rule string) bool {
@@ -28,7 +28,7 @@ func (s *GrayRuleService) parseRule2(ctx context.Context, visitInfo int, rule st
 		fmt.Println("parse rule:", rule)
 		switch rule[0] {
 		case '!':
-			fmt.Println( "!", rule[1:])
+			fmt.Println("!", rule[1:])
 			//return !s.parseRule2(ctx, visitInfo, rule[1:])
 			idx, pattern := findFirstPattern(rule[1:])
 			res = !s.parseRule2(ctx, visitInfo, pattern)
@@ -139,9 +139,9 @@ func (s *GrayRuleService) parseRule(ctx context.Context, visitInfo int, rule str
 			//}
 			//fmt.Println("sub rule: (", subRule, ")", "preOp:", string(preOp), preNot, "-->", res)
 		// case ')':
-			// return
-			//i++
-			//fmt.Println("skip ')'")
+		// return
+		//i++
+		//fmt.Println("skip ')'")
 		default:
 			// var i = 0
 			ruleId := parseRuleId(rule, &i)
@@ -153,7 +153,7 @@ func (s *GrayRuleService) parseRule(ctx context.Context, visitInfo int, rule str
 }
 func parseRuleId(rule string, i *int) string {
 	j := *i
-	if *i == len(rule) - 1 {
+	if *i == len(rule)-1 {
 		*i++
 		return rule[len(rule)-1:]
 	}
@@ -175,7 +175,7 @@ func findFirstPattern(rule string) (int, string) {
 }
 func findFirstIdPattern(rule string) (int, string) {
 	var i = 0
-	for ; i< len(rule); i++ {
+	for ; i < len(rule); i++ {
 		if rule[i] == '!' || rule[i] == '&' || rule[i] == '|' || rule[i] == '(' || rule[i] == ')' {
 			break
 		}
@@ -185,7 +185,7 @@ func findFirstIdPattern(rule string) (int, string) {
 func findFirstParenthesisPattern(rule string) (int, string) {
 	num := 1
 	var i = 1
-	for ; i<len(rule); i++ {
+	for ; i < len(rule); i++ {
 		if num == 0 {
 			break
 		}
@@ -227,4 +227,3 @@ func ruleLegal(rule string) bool {
 	}
 	return true
 }
-
