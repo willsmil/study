@@ -10,6 +10,13 @@ import (
 	"unsafe"
 )
 
+func TestAppend(t *testing.T) {
+	res := []int{1, 2, 4, 5}
+	fmt.Println(append(res[:2], 3), res[3:])
+	res = append(res, res[2:]...)
+	fmt.Println(res)
+}
+
 func TestSetFunc(t *testing.T) {
 	fmt.Println(strings.Index("abc", "b"))
 }

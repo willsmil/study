@@ -77,6 +77,10 @@ type Stack struct {
 	data []int
 }
 
+func NewStack() *Stack {
+	return &Stack{data: []int{}}
+}
+
 func (s *Stack) Peek() int {
 	if len(s.data) == 0 {
 		return 0
