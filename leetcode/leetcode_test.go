@@ -5,6 +5,18 @@ import (
 	"testing"
 )
 
+func TestHeapSort(t *testing.T) {
+	fmt.Println(heapSort([]int{3, 4, 5, 2, 7, 9, 10, 8, 6}))
+}
+
+func TestFindKLargest(t *testing.T) {
+	fmt.Println(findKthLargest([]int{3, 4, 5, 2, 7, 9, 10, 8, 6}, 1))
+}
+
+func TestQuickSort(t *testing.T) {
+	fmt.Println(quickSort([]int{3, 4, 5, 2, 7, 9, 10, 8, 6}))
+}
+
 func TestTopKFrequent(t *testing.T) {
 	topKFrequent([]int{3, 2, 3, 1, 2, 4, 5, 5, 6, 7, 7, 8, 2, 3, 1, 1, 1, 10, 11, 5, 6, 2, 4, 7, 8, 5}, 10)
 }
